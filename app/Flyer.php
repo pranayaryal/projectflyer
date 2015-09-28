@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Photo;
 
 /**
  * Class Flyer
@@ -32,10 +33,10 @@ class Flyer extends Model
      * @param string  $street
      * @return Builder
      */
-    public function scopeLocatedAt($query, $zip, $street){
+    public static function locatedAt($zip, $street){
         $street = str_replace('-', ' ', $street);
 
-        return $query->where(compact('zip', 'street'));
+        return static:: where(compact('zip', 'street'))->first();
 
     }
 
@@ -43,6 +44,12 @@ class Flyer extends Model
     {
         return '$'. number_format($price);
     }
+
+    public function addPhoto(Photo $photo)
+    {
+        return $this->photos()->save($photo);
+    }
+
     /**
      * A flyer is composed of many photos
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
