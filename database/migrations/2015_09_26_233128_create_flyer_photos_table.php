@@ -20,7 +20,7 @@ class CreateFlyerPhotosTable extends Migration
                 ->references('id')
                 ->on('flyers')
                 ->onDelete('cascade');
-            $table->string('photo');
+            $table->string('paths');
             $table->timestamps();
         });
     }
