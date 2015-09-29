@@ -6,8 +6,7 @@
     <h1>Selling Your Home?</h1>
 
     <hr>
-    <div class="row">
-        <form method="POST" action="/flyers" enctype="multipart/form-data" class="col-md-6">
+        <form method="POST" action="/flyers" enctype="multipart/form-data">
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     <ul>
@@ -21,7 +20,7 @@
 
 
         </form>
-    </div>
+
 
 @stop
 

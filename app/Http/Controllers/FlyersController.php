@@ -7,6 +7,7 @@ use App\Http\Requests\FlyerRequest;
 use App\Http\Controllers\Controller;
 use App\Flyer;
 use App\Photo;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FlyersController extends Controller
 {
@@ -15,7 +16,9 @@ class FlyersController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('auth', ['except' => ['show']]);
     }
+
 
     /**
      * Display a listing of the resource.
@@ -79,15 +82,20 @@ class FlyersController extends Controller
             'photo' => 'mimes:jpeg,png,bmp'
         ]);
 
-            $file = $request->file('file');
-            $photo = Photo::fromForm($file);
-            dd(Flyer::locatedAt($zip, $street));
-
-            Flyer::locatedAt($zip, $street)->addPhoto($photo);
+        $photo = $this->makePhoto($request->file('file'));
+        Flyer::locatedAt($zip, $street)->addPhotos($photo);
 
 
 
 
+
+
+    }
+
+    protected function makePhoto(UploadedFile $file)
+    {
+        return Photo::named($file->getClientOriginalName())
+            ->move($file);
     }
 
 
