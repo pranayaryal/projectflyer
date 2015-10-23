@@ -7,7 +7,14 @@
             This a jumbotron taken from bootstrap
         </p>
 
-        <a href="/flyers/create" class="btn btn-primary">Create a Flyer</a>
+        @if (Auth::check())
+
+            <a href="/flyers/create" class="btn btn-primary">Create A Flyer</a>
+        @else
+
+            <a href="/auth/register" class="btn btn-primary">Sign Up</a>
+        @endif
+
 
     </div>
 

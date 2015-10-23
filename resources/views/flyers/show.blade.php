@@ -21,25 +21,30 @@
                     @endforeach
                 </div>
             @endforeach
+
+                @if ($user && $user->owns($flyer))
+
+                <hr>
+                <form id="addPhotosForm"
+                          action="/{{$flyer->zip}}/{{$flyer->street}}/photos"
+                            {{--action="{{ route('store_photo_path'), [$flyer->zip, $flyer->street] }}"--}}
+                          method="POST"
+                          class="dropzone">
+                        {{csrf_field()}}
+                </form>
+                @endif
         </div>
     </div>
     <hr>
-    <h2>Add Your Photos</h2>
 
-    <form id="addPhotosForm"
-          action="/{{$flyer->zip}}/{{$flyer->street}}/photos"
-          {{--action="{{ route('store_photo_path'), [$flyer->zip, $flyer->street] }}"--}}
-          method="POST"
-          class="dropzone">
-        {{csrf_field()}}
-    </form>
+
 @stop
 
 @section('scripts.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
     <script>
-        Dropzoe.options.addPhotosForm = {
+        Dropzone.options.addPhotosForm = {
             paramName: 'file',
             acceptedFiles: '.jpg, .jpeg, .png, .bmp'
         }

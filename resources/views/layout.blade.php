@@ -10,7 +10,7 @@
 
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -26,8 +26,24 @@
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="/auth/register">Register</a> </li>
+                    {{--<li><a href="/auth/register">Register</a> </li>--}}
+                    @if($user)
+                        <li><a href="/auth/logout">Logout</a> </li>
+                    @endif
                 </ul>
+                @if ($signedIn)
+                    <p class="navbar-text navbar-right">
+
+                        Hello, {{$user->name}}
+
+                    </p>
+                    @else
+                        <p class="navbar-text navbar-right">
+                            Already have an account?
+                            <a href="auth/login">LogIn</a> or
+                            <a href="/auth/register">Register</a>
+                        </p>
+                @endif
             </div><!--/.nav-collapse -->
         </div>
     </nav>

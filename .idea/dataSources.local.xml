@@ -3,8 +3,9 @@
   <component name="dataSourceStorageLocal">
     <data-source name="MySQL - projectflyer@localhost" uuid="20a79fcd-af09-4634-9fcb-a8d07c62cdd2">
       <secret-storage>master_key</secret-storage>
-      <first-sync>true</first-sync>
-      <user-name>user</user-name>
+      <user-name>homestead</user-name>
+      <schema-pattern>projectflyer.*</schema-pattern>
+      <default-schemas>projectflyer.*</default-schemas>
     </data-source>
   </component>
 </project>
